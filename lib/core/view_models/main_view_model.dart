@@ -5,12 +5,15 @@ import 'package:starwars_companion/core/models/people_info_api_picture.dart';
 import 'package:starwars_companion/core/models/people_list.dart';
 import 'package:starwars_companion/core/models/planet_info.dart';
 import 'package:starwars_companion/core/models/search_results.dart';
+import 'package:starwars_companion/core/models/starships_info.dart';
+import 'package:starwars_companion/core/models/vehicles_info.dart';
 import 'package:starwars_companion/core/services/custom_api.dart';
 import 'package:starwars_companion/core/view_models/base_view_model.dart';
 import 'package:starwars_companion/ui/values/strings.dart';
 
 class MainViewModel extends BaseViewModel {
   static MainViewModel _mainViewModel;
+
   static MainViewModel instance() {
     if (_mainViewModel == null) {
       _mainViewModel = MainViewModel();
@@ -31,6 +34,8 @@ class MainViewModel extends BaseViewModel {
   PeopleList peopleList = PeopleList();
   PeopleInfo peopleInfo = PeopleInfo();
   PlanetInfo planetInfo = PlanetInfo();
+  VehiclesInfo vehiclesInfo = VehiclesInfo();
+  StarshipsInfo starShipInfo;
   FilmInfo filmInfo = FilmInfo();
   SearchResults searchResults = SearchResults();
   List<AllData> allData = List();
@@ -84,6 +89,34 @@ class MainViewModel extends BaseViewModel {
       var response = await api.getFilmInfo(url);
       if (response is FilmInfo) {
         filmInfo = response;
+      }
+    } catch (e) {
+      throw e;
+    }
+    notifyListeners();
+  }
+
+  void getVehicleInfo(String url) async {
+    vehiclesInfo = VehiclesInfo();
+    notifyListeners();
+    try {
+      var response = await api.getVehicleInfo(url);
+      if (response is VehiclesInfo) {
+        vehiclesInfo = response;
+      }
+    } catch (e) {
+      throw e;
+    }
+    notifyListeners();
+  }
+
+  void getStarshipInfo(String url) async {
+    starShipInfo = StarshipsInfo();
+    notifyListeners();
+    try {
+      var response = await api.getStarshipsInfo(url);
+      if (response is StarshipsInfo) {
+        starShipInfo = response;
       }
     } catch (e) {
       throw e;

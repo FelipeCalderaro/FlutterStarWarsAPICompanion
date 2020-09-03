@@ -9,3 +9,9 @@ const ICONS_BY = [
   'X-Wing By https://thenounproject.com/habione.404/',
   'Star Destroyer By https://thenounproject.com/henningg/',
 ];
+
+// For Gifs and images
+const GIF_BY = [
+  'X-Wing GIF By https://dribbble.com/shots/4158501-Low-poly-X-wing',
+  'Star Destroyer By https://dribbble.com/shots/4331957-Star-Destroyer-Low-poly'
+];

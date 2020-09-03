@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:starwars_companion/core/view_models/main_view_model.dart';
 import 'package:starwars_companion/ui/screens/about_film.dart';
+import 'package:starwars_companion/ui/screens/about_starships.dart';
+import 'package:starwars_companion/ui/screens/about_vehicles.dart';
 import 'package:starwars_companion/ui/values/colors.dart';
 import 'package:starwars_companion/ui/values/values.dart';
 import 'package:starwars_companion/ui/widgets/film_image_card.dart';
@@ -257,26 +259,39 @@ class AboutCharacter extends StatelessWidget {
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: mainViewModel.peopleInfo.vehicles.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                          "Vehicle: ${mainViewModel.peopleInfo.vehicles[index].split('/')[5]}"),
-                                      Icon(
-                                        Icons.arrow_right,
-                                        color: Colors.white,
-                                      ),
-                                    ],
+                            return GestureDetector(
+                              onTap: () {
+                                mainViewModel.getVehicleInfo(
+                                    mainViewModel.peopleInfo.vehicles[index]);
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => AboutVehicleScreen(),
                                   ),
-                                  Divider(
-                                    color: Colors.grey[700],
-                                    thickness: 1.5,
-                                  )
-                                ],
+                                );
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                            "Vehicle: ${mainViewModel.peopleInfo.vehicles[index].split('/')[5]}"),
+                                        Icon(
+                                          Icons.arrow_right,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: Colors.grey[700],
+                                      thickness: 1.5,
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },
@@ -319,26 +334,39 @@ class AboutCharacter extends StatelessWidget {
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: mainViewModel.peopleInfo.starships.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                          "Starship: ${mainViewModel.peopleInfo.starships[index].split('/')[5]}"),
-                                      Icon(
-                                        Icons.arrow_right,
-                                        color: Colors.white,
-                                      ),
-                                    ],
+                            return GestureDetector(
+                              onTap: () {
+                                mainViewModel.getStarshipInfo(
+                                    mainViewModel.peopleInfo.starships[index]);
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => AboutStarshipScreen(),
                                   ),
-                                  Divider(
-                                    color: Colors.grey[700],
-                                    thickness: 1.5,
-                                  )
-                                ],
+                                );
+                              },
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                            "Starship: ${mainViewModel.peopleInfo.starships[index].split('/')[5]}"),
+                                        Icon(
+                                          Icons.arrow_right,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: Colors.grey[700],
+                                      thickness: 1.5,
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           },

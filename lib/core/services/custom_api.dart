@@ -10,6 +10,8 @@ import 'package:starwars_companion/core/models/people_info.dart';
 import 'package:starwars_companion/core/models/people_list.dart';
 import 'package:starwars_companion/core/models/planet_info.dart';
 import 'package:starwars_companion/core/models/search_results.dart';
+import 'package:starwars_companion/core/models/starships_info.dart';
+import 'package:starwars_companion/core/models/vehicles_info.dart';
 import 'package:starwars_companion/core/services/api.dart';
 import 'package:starwars_companion/ui/values/strings.dart';
 
@@ -75,6 +77,28 @@ class CustomAPI extends API {
       var response = await client.get('$BASE_URL/people?search=$query');
       if (response.statusCode == 200) {
         return SearchResults.fromRawJson(utf8.decode(response.bodyBytes));
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<dynamic> getVehicleInfo(String url) async {
+    try {
+      var response = await client.get(url);
+      if (response.statusCode == 200) {
+        return VehiclesInfo.fromRawJson(utf8.decode(response.bodyBytes));
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<dynamic> getStarshipsInfo(String url) async {
+    try {
+      var response = await client.get(url);
+      if (response.statusCode == 200) {
+        return StarshipsInfo.fromRawJson(utf8.decode(response.bodyBytes));
       }
     } catch (e) {
       throw e;
