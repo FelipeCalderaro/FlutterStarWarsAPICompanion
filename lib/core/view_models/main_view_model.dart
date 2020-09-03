@@ -1,6 +1,10 @@
+import 'package:starwars_companion/core/models/all_data.dart';
+import 'package:starwars_companion/core/models/film_info.dart';
 import 'package:starwars_companion/core/models/people_info.dart';
 import 'package:starwars_companion/core/models/people_info_api_picture.dart';
 import 'package:starwars_companion/core/models/people_list.dart';
+import 'package:starwars_companion/core/models/planet_info.dart';
+import 'package:starwars_companion/core/models/search_results.dart';
 import 'package:starwars_companion/core/services/custom_api.dart';
 import 'package:starwars_companion/core/view_models/base_view_model.dart';
 import 'package:starwars_companion/ui/values/strings.dart';
@@ -17,6 +21,7 @@ class MainViewModel extends BaseViewModel {
   // Constructor
   MainViewModel() {
     getPeopleList();
+    getAllData();
   }
 
   // Models
@@ -25,6 +30,10 @@ class MainViewModel extends BaseViewModel {
   // Variables
   PeopleList peopleList = PeopleList();
   PeopleInfo peopleInfo = PeopleInfo();
+  PlanetInfo planetInfo = PlanetInfo();
+  FilmInfo filmInfo = FilmInfo();
+  SearchResults searchResults = SearchResults();
+  List<AllData> allData = List();
 
   // SWAPI related Functions
   void getPeopleList() async {
@@ -54,6 +63,34 @@ class MainViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  void getPlanetInfo(String url) async {
+    planetInfo = PlanetInfo();
+    notifyListeners();
+    try {
+      var response = await api.getPlanetInfo(url);
+      if (response is PlanetInfo) {
+        planetInfo = response;
+      }
+    } catch (e) {
+      throw e;
+    }
+    notifyListeners();
+  }
+
+  void getFilmInfo(String url) async {
+    filmInfo = FilmInfo();
+    notifyListeners();
+    try {
+      var response = await api.getFilmInfo(url);
+      if (response is FilmInfo) {
+        filmInfo = response;
+      }
+    } catch (e) {
+      throw e;
+    }
+    notifyListeners();
+  }
+
   // akabab related functions
   void getPeoplePicture() async {
     try {
@@ -68,5 +105,41 @@ class MainViewModel extends BaseViewModel {
       throw e;
     }
     notifyListeners();
+  }
+
+  void getAllData() async {
+    try {
+      var response = await api.getAllData();
+      if (response is List<AllData>) {
+        response.removeRange(response.length - 5, response.length);
+        allData = response;
+      }
+    } catch (e) {
+      throw e;
+    }
+    notifyListeners();
+  }
+
+  void getSearchResults(String query) async {
+    searchResults = SearchResults();
+    notifyListeners();
+    try {
+      var response = await api.getSearchResults(query);
+      if (response is SearchResults) {
+        searchResults = response;
+      }
+    } catch (e) {
+      throw e;
+    }
+    notifyListeners();
+  }
+
+  String getImageUrlForCharacter(String characterName) {
+    for (var character in allData) {
+      if (characterName == character.name) {
+        return character.image;
+      }
+    }
+    return '';
   }
 }

@@ -1,13 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:starwars_companion/core/view_models/main_view_model.dart';
+import 'package:starwars_companion/ui/screens/about_film.dart';
 import 'package:starwars_companion/ui/values/colors.dart';
 import 'package:starwars_companion/ui/values/values.dart';
 import 'package:starwars_companion/ui/widgets/film_image_card.dart';
 import 'package:starwars_companion/ui/widgets/image_card.dart';
 
-class AboutCharacter extends StatefulWidget {
+class AboutCharacter extends StatelessWidget {
   String title;
   String imageUrl;
   String heroTag;
@@ -15,14 +17,9 @@ class AboutCharacter extends StatefulWidget {
   AboutCharacter({
     @required this.title,
     @required this.heroTag,
-    this.imageUrl,
+    @required this.imageUrl,
   });
 
-  @override
-  _AboutCharacterState createState() => _AboutCharacterState();
-}
-
-class _AboutCharacterState extends State<AboutCharacter> {
   bool showFilms = true;
   bool showVechicles = false;
   bool showStarships = false;
@@ -35,7 +32,7 @@ class _AboutCharacterState extends State<AboutCharacter> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
         leading: BackButton(),
       ),
       body: ListView(
@@ -46,10 +43,10 @@ class _AboutCharacterState extends State<AboutCharacter> {
             child: Row(
               children: [
                 Hero(
-                  tag: widget.heroTag,
+                  tag: heroTag,
                   child: ImageCard(
                     title: '',
-                    imageUrl: widget.imageUrl,
+                    imageUrl: imageUrl,
                   ),
                 ),
                 mainViewModel.peopleInfo.name == null
@@ -181,10 +178,27 @@ class _AboutCharacterState extends State<AboutCharacter> {
                     mainViewModel.peopleInfo.films.length,
                     (index) => Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: FilmImageCard(
-                        assetUrl:
-                            "assets/images/films/${mainViewModel.peopleInfo.films[index].split('/')[5]}.jpg",
-                        onTap: () {},
+                      child: Hero(
+                        tag: 'film_$index',
+                        child: FilmImageCard(
+                          width: double.infinity,
+                          assetUrl:
+                              "assets/images/films/${mainViewModel.peopleInfo.films[index].split('/')[5]}.jpg",
+                          onTap: () {
+                            mainViewModel.getFilmInfo(
+                                mainViewModel.peopleInfo.films[index]);
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => AboutFilmScreen(
+                                  heroTag: 'film_$index',
+                                  assetUrl:
+                                      "assets/images/films/${mainViewModel.peopleInfo.films[index].split('/')[5]}.jpg",
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -208,6 +222,130 @@ class _AboutCharacterState extends State<AboutCharacter> {
                     ),
                   ),
                 ),
+          mainViewModel.peopleInfo.vehicles != null
+              ? mainViewModel.peopleInfo.vehicles.isEmpty
+                  ? Container()
+                  : Column(
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: DEFAULT_PADDING),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Vehicles",
+                                style: TextStyle(
+                                  fontSize: 22 /
+                                      MediaQuery.of(context).textScaleFactor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              VerticalDivider(),
+                              Container(
+                                height: 35,
+                                child: Image.asset(
+                                  'assets/icons/Xwing.png',
+                                  color: Colors.white,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: mainViewModel.peopleInfo.vehicles.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          "Vehicle: ${mainViewModel.peopleInfo.vehicles[index].split('/')[5]}"),
+                                      Icon(
+                                        Icons.arrow_right,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    color: Colors.grey[700],
+                                    thickness: 1.5,
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        )
+                      ],
+                    )
+              : Container(),
+          mainViewModel.peopleInfo.starships != null
+              ? mainViewModel.peopleInfo.starships.isEmpty
+                  ? Container()
+                  : Column(
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: DEFAULT_PADDING),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Starships",
+                                style: TextStyle(
+                                  fontSize: 22 /
+                                      MediaQuery.of(context).textScaleFactor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              VerticalDivider(),
+                              Container(
+                                height: 35,
+                                child: Image.asset(
+                                  'assets/icons/starDestroyer.png',
+                                  color: Colors.white,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: mainViewModel.peopleInfo.starships.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                          "Starship: ${mainViewModel.peopleInfo.starships[index].split('/')[5]}"),
+                                      Icon(
+                                        Icons.arrow_right,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    color: Colors.grey[700],
+                                    thickness: 1.5,
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        )
+                      ],
+                    )
+              : Container(),
         ],
       ),
     );

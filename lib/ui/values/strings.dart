@@ -3,3 +3,9 @@ const BASE_URL = "https://swapi.dev/api";
 
 // This api is just to get caracters images
 const BASE_URL_API2 = "https://akabab.github.io/starwars-api/api/";
+
+// For icons rights
+const ICONS_BY = [
+  'X-Wing By https://thenounproject.com/habione.404/',
+  'Star Destroyer By https://thenounproject.com/henningg/',
+];

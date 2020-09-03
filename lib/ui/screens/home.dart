@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.all(DEFAULT_PADDING),
               children: [
                 Text(
-                  "Main Characters",
+                  "Some Characters",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

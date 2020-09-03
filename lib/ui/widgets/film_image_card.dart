@@ -7,11 +7,12 @@ class FilmImageCard extends StatelessWidget {
   Function onTap;
 
   double height = double.infinity;
-  double width = 180;
+  double width;
 
   FilmImageCard({
     @required this.assetUrl,
     @required this.onTap,
+    this.width = 140,
   });
 
   @override
@@ -48,7 +49,7 @@ class FilmImageCard extends StatelessWidget {
                   colors: [
                     Colors.transparent,
                     Colors.black12,
-                    Colors.black,
+                    Colors.black38,
                   ],
                 ),
               ),
