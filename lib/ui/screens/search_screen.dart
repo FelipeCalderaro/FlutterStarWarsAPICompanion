@@ -22,6 +22,9 @@ class SearchScreen extends SearchDelegate {
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
+      query.length != 0
+          ? IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')
+          : Container(),
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () => buildResults(context),
