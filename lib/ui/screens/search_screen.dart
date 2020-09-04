@@ -59,7 +59,7 @@ class SearchScreen extends SearchDelegate {
     }
     // }
 
-    return dataList.isEmpty && query.length == 0
+    return query.length == 0
         ? Center(
             child:
                 Text('Type the name of the character that you want to search.'),
@@ -76,6 +76,7 @@ class SearchScreen extends SearchDelegate {
                   (index) => Hero(
                     tag: 'search_$index',
                     child: ImageCard(
+                      width: double.infinity,
                       imageUrl: dataList[index].image,
                       title: dataList[index].name,
                       onTap: () {

@@ -38,10 +38,16 @@ class MainViewModel extends BaseViewModel {
   FilmInfo filmInfo = FilmInfo();
   SearchResults searchResults = SearchResults();
   List<AllData> allData = List();
+  double scrollPosition = 0.0;
 
   // Auxiliary Variables
   List<AllData> pilotsData = List();
   List<AllData> residentsData = List();
+
+  // Functions
+  void storeScrollPosition(double scroll) {
+    scrollPosition = scroll;
+  }
 
   // SWAPI related Functions
   Future<bool> getPeopleList() async {
