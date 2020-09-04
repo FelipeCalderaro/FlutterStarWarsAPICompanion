@@ -75,14 +75,14 @@ class _SplashScreenState extends State<SplashScreen>
     random = Random().nextDouble();
     _valueController
         .animateTo(random > 0.6 ? random / 2 : random,
-            duration: Duration(seconds: 1))
+            duration: Duration(milliseconds: 500))
         .then(
           (value) async => await mainViewModel.getPeopleList().then(
             (value) {
               _valueController
                   .animateTo(
                 1,
-                duration: Duration(seconds: 2),
+                duration: Duration(seconds: 1),
               )
                   .then(
                 (value) {
