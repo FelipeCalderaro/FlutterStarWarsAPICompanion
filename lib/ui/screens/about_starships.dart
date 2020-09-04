@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starwars_companion/core/view_models/main_view_model.dart';
+import 'package:starwars_companion/ui/screens/about_character.dart';
+import 'package:starwars_companion/ui/screens/about_film.dart';
 import 'package:starwars_companion/ui/values/colors.dart';
+import 'package:starwars_companion/ui/values/strings.dart';
 import 'package:starwars_companion/ui/values/values.dart';
 import 'package:starwars_companion/ui/widgets/film_image_card.dart';
 import 'package:starwars_companion/ui/widgets/image_card.dart';
@@ -254,6 +258,23 @@ class AboutStarshipScreen extends StatelessWidget {
                                 width: 115,
                                 title: mainViewModel.pilotsData[index].name,
                                 imageUrl: mainViewModel.pilotsData[index].image,
+                                onTap: () {
+                                  mainViewModel.getPeopleInfo(
+                                      "$BASE_URL/people/${mainViewModel.pilotsData[index].id}");
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => AboutCharacter(
+                                        title: mainViewModel
+                                            .pilotsData[index].name,
+                                        heroTag: '',
+                                        imageUrl: mainViewModel
+                                            .pilotsData[index].image,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -279,7 +300,23 @@ class AboutStarshipScreen extends StatelessWidget {
                                       width: 115,
                                       assetUrl:
                                           "assets/images/films/${mainViewModel.starShipInfo.films[index].split('/')[5]}.jpg",
-                                      onTap: () {},
+                                      onTap: () {
+                                        mainViewModel.getFilmInfo(mainViewModel
+                                            .planetInfo.films[index]);
+
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                            builder: (context) =>
+                                                AboutFilmScreen(
+                                              heroTag: '',
+                                              assetUrl:
+                                                  "assets/images/films/${mainViewModel.planetInfo.films[index].split('/')[5]}.jpg",
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     )),
                           ),
                         ),
