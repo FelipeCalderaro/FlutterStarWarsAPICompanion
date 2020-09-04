@@ -23,7 +23,6 @@ class MainViewModel extends BaseViewModel {
 
   // Constructor
   MainViewModel() {
-    getPeopleList();
     getAllData();
   }
 
@@ -40,8 +39,12 @@ class MainViewModel extends BaseViewModel {
   SearchResults searchResults = SearchResults();
   List<AllData> allData = List();
 
+  // Auxiliary Variables
+  List<AllData> pilotsData = List();
+  List<AllData> residentsData = List();
+
   // SWAPI related Functions
-  void getPeopleList() async {
+  Future<bool> getPeopleList() async {
     try {
       var response = await api.getPeopleList();
       if (response is PeopleList) {
@@ -52,6 +55,7 @@ class MainViewModel extends BaseViewModel {
       throw e;
     }
     notifyListeners();
+    return true;
   }
 
   void getPeopleInfo(String url) async {
@@ -75,6 +79,7 @@ class MainViewModel extends BaseViewModel {
       var response = await api.getPlanetInfo(url);
       if (response is PlanetInfo) {
         planetInfo = response;
+        getResidentList(response.residents);
       }
     } catch (e) {
       throw e;
@@ -103,6 +108,7 @@ class MainViewModel extends BaseViewModel {
       var response = await api.getVehicleInfo(url);
       if (response is VehiclesInfo) {
         vehiclesInfo = response;
+        getPilotsList(response.pilots);
       }
     } catch (e) {
       throw e;
@@ -117,6 +123,7 @@ class MainViewModel extends BaseViewModel {
       var response = await api.getStarshipsInfo(url);
       if (response is StarshipsInfo) {
         starShipInfo = response;
+        getPilotsList(response.pilots);
       }
     } catch (e) {
       throw e;
@@ -174,5 +181,35 @@ class MainViewModel extends BaseViewModel {
       }
     }
     return '';
+  }
+
+  // Get pilots pictures functions (For about startship and about vehicles)
+
+  void getPilotsList(List<String> pilotsList) {
+    pilotsData = List<AllData>();
+    notifyListeners();
+    for (var pilot in pilotsList) {
+      for (var data in allData) {
+        if (data.id == int.parse(pilot.split('/')[5])) {
+          pilotsData.add(data);
+        }
+      }
+    }
+
+    notifyListeners();
+  }
+
+  void getResidentList(List<String> residentsList) {
+    residentsData = List<AllData>();
+    notifyListeners();
+    for (var pilot in residentsList) {
+      for (var data in allData) {
+        if (data.id == int.parse(pilot.split('/')[5])) {
+          residentsData.add(data);
+        }
+      }
+    }
+
+    notifyListeners();
   }
 }

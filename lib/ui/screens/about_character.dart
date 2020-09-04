@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:starwars_companion/core/view_models/main_view_model.dart';
 import 'package:starwars_companion/ui/screens/about_film.dart';
+import 'package:starwars_companion/ui/screens/about_planet.dart';
 import 'package:starwars_companion/ui/screens/about_starships.dart';
 import 'package:starwars_companion/ui/screens/about_vehicles.dart';
 import 'package:starwars_companion/ui/values/colors.dart';
@@ -140,7 +141,16 @@ class AboutCharacter extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               color: secondaryColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                mainViewModel.getPlanetInfo(
+                                    mainViewModel.peopleInfo.homeworld);
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => AboutPlanetScreen(),
+                                  ),
+                                );
+                              },
                               child: Text(
                                 "Homeworld",
                                 style: TextStyle(
@@ -181,7 +191,8 @@ class AboutCharacter extends StatelessWidget {
                     (index) => Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Hero(
-                        tag: 'film_$index',
+                        tag:
+                            'film_${mainViewModel.peopleInfo.films[index].split('/')[5]}',
                         child: FilmImageCard(
                           width: double.infinity,
                           assetUrl:
@@ -193,7 +204,8 @@ class AboutCharacter extends StatelessWidget {
                               context,
                               CupertinoPageRoute(
                                 builder: (context) => AboutFilmScreen(
-                                  heroTag: 'film_$index',
+                                  heroTag:
+                                      'film_${mainViewModel.peopleInfo.films[index].split('/')[5]}',
                                   assetUrl:
                                       "assets/images/films/${mainViewModel.peopleInfo.films[index].split('/')[5]}.jpg",
                                 ),
@@ -271,18 +283,24 @@ class AboutCharacter extends StatelessWidget {
                                 );
                               },
                               child: Container(
+                                color: primaryColor,
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            "Vehicle: ${mainViewModel.peopleInfo.vehicles[index].split('/')[5]}"),
+                                          "Vehicle: ${mainViewModel.peopleInfo.vehicles[index].split('/')[5]}",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                         Icon(
-                                          Icons.arrow_right,
-                                          color: Colors.white,
+                                          Icons.arrow_forward_ios_sharp,
+                                          color: secondaryColor,
                                         ),
                                       ],
                                     ),
@@ -346,18 +364,24 @@ class AboutCharacter extends StatelessWidget {
                                 );
                               },
                               child: Container(
+                                color: primaryColor,
+                                height: 45,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                            "Starship: ${mainViewModel.peopleInfo.starships[index].split('/')[5]}"),
+                                          "Starship: ${mainViewModel.peopleInfo.starships[index].split('/')[5]}",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          ),
+                                        ),
                                         Icon(
-                                          Icons.arrow_right,
-                                          color: Colors.white,
+                                          Icons.arrow_forward_ios_sharp,
+                                          color: secondaryColor,
                                         ),
                                       ],
                                     ),

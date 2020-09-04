@@ -6,12 +6,12 @@ const BASE_URL_API2 = "https://akabab.github.io/starwars-api/api/";
 
 // For icons rights
 const ICONS_BY = [
-  'X-Wing By https://thenounproject.com/habione.404/',
-  'Star Destroyer By https://thenounproject.com/henningg/',
+  'X-Wing By habione.404 (thenounproject.com)',
+  'Star Destroyer By henningg (thenounproject.com)',
 ];
 
 // For Gifs and images
 const GIF_BY = [
-  'X-Wing GIF By https://dribbble.com/shots/4158501-Low-poly-X-wing',
-  'Star Destroyer By https://dribbble.com/shots/4331957-Star-Destroyer-Low-poly'
+  'X-Wing gif By emil_cupic (dribbble.com)',
+  'Star Destroyer gif By emil_cupic (dribbble.com)'
 ];

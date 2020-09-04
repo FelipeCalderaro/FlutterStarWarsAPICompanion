@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:starwars_companion/core/view_models/main_view_model.dart';
 import 'package:starwars_companion/ui/values/colors.dart';
 import 'package:starwars_companion/ui/values/values.dart';
+import 'package:starwars_companion/ui/widgets/film_image_card.dart';
+import 'package:starwars_companion/ui/widgets/image_card.dart';
 
 class AboutVehicleScreen extends StatelessWidget {
   @override
@@ -241,16 +243,42 @@ class AboutVehicleScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Column(
-                          children: List.generate(
-                            mainViewModel.vehiclesInfo.pilots.length,
-                            (index) => Text(
-                              mainViewModel.vehiclesInfo.pilots[index],
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
+                        subtitle: Container(
+                          height: 200,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: List.generate(
+                              mainViewModel.pilotsData.length,
+                              (index) => ImageCard(
+                                width: 115,
+                                title: mainViewModel.pilotsData[index].name,
+                                imageUrl: mainViewModel.pilotsData[index].image,
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          'Films',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Container(
+                          height: 200,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: List.generate(
+                                mainViewModel.vehiclesInfo.films.length,
+                                (index) => FilmImageCard(
+                                      width: 115,
+                                      assetUrl:
+                                          "assets/images/films/${mainViewModel.vehiclesInfo.films[index].split('/')[5]}.jpg",
+                                      onTap: () {},
+                                    )),
                           ),
                         ),
                       ),

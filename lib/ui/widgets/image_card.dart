@@ -7,13 +7,15 @@ class ImageCard extends StatelessWidget {
   String imageUrl;
   Function onTap;
 
-  double height = double.infinity;
-  double width = 180;
+  double height;
+  double width;
 
   ImageCard({
     @required this.title,
     @required this.imageUrl,
     this.onTap,
+    this.height = double.infinity,
+    this.width = 180,
   });
 
   @override
@@ -57,7 +59,8 @@ class ImageCard extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
+            Container(
+              width: width,
               padding: EdgeInsets.all(DEFAULT_PADDING),
               child: Text(
                 title,

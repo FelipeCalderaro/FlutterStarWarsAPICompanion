@@ -47,6 +47,7 @@ flutter:
   assets:
    - assets/icons/
    - assets/GIFs/
+   - assets/images/
    - assets/images/films/
    - assets/images/planets/
   #  - images/a_dot_ham.jpeg

@@ -6,7 +6,7 @@ import 'package:starwars_companion/ui/values/values.dart';
 import 'package:starwars_companion/ui/widgets/film_image_card.dart';
 import 'package:starwars_companion/ui/widgets/image_card.dart';
 
-class AboutStarshipScreen extends StatelessWidget {
+class AboutPlanetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainViewModel = Provider.of<MainViewModel>(context);
@@ -14,7 +14,7 @@ class AboutStarshipScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
-        title: Text('Starship'),
+        title: Text('Planet'),
       ),
       body: Stack(
         children: [
@@ -22,7 +22,7 @@ class AboutStarshipScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Image.asset(
-              'assets/GIFs/star-destroyer.gif',
+              'assets/images/planets/planetEarth.jpg',
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -42,7 +42,7 @@ class AboutStarshipScreen extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(DEFAULT_PADDING),
-            child: mainViewModel.starShipInfo.name == null
+            child: mainViewModel.planetInfo.name == null
                 ? Center(
                     child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation(
@@ -54,7 +54,7 @@ class AboutStarshipScreen extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     children: [
                       Text(
-                        mainViewModel.starShipInfo.name,
+                        mainViewModel.planetInfo.name,
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Model',
+                          'Rotation period',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -74,7 +74,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.model,
+                          mainViewModel.planetInfo.rotationPeriod,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -83,7 +83,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Manufacturer',
+                          'Orbital period',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -91,7 +91,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.manufacturer,
+                          mainViewModel.planetInfo.orbitalPeriod,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -100,7 +100,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Cost in credits',
+                          'Diameter',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -108,7 +108,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.costInCredits,
+                          mainViewModel.planetInfo.diameter,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -117,7 +117,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Lenght',
+                          'Climate',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -125,7 +125,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.length,
+                          mainViewModel.planetInfo.climate,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -134,7 +134,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Max Atmosphering Speed',
+                          'Gravity',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -142,7 +142,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.maxAtmospheringSpeed,
+                          mainViewModel.planetInfo.gravity,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -151,7 +151,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Crew',
+                          'Surface water',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -159,7 +159,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.crew,
+                          mainViewModel.planetInfo.surfaceWater,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -168,7 +168,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Passengers',
+                          'Population',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -176,7 +176,7 @@ class AboutStarshipScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          mainViewModel.starShipInfo.passengers,
+                          mainViewModel.planetInfo.population,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -185,58 +185,7 @@ class AboutStarshipScreen extends StatelessWidget {
                       ),
                       ListTile(
                         title: Text(
-                          'Cargo Capacity',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          mainViewModel.starShipInfo.cargoCapacity,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          'Consumables',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          mainViewModel.starShipInfo.consumables,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          'Hyperdrive Rating',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          mainViewModel.starShipInfo.hyperdriveRating,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          'Pilots',
+                          'Residents',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -249,41 +198,44 @@ class AboutStarshipScreen extends StatelessWidget {
                             physics: BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             children: List.generate(
-                              mainViewModel.pilotsData.length,
+                              mainViewModel.residentsData.length,
                               (index) => ImageCard(
                                 width: 115,
-                                title: mainViewModel.pilotsData[index].name,
-                                imageUrl: mainViewModel.pilotsData[index].image,
+                                title: mainViewModel.residentsData[index].name,
+                                imageUrl:
+                                    mainViewModel.residentsData[index].image,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      ListTile(
-                        title: Text(
-                          'Films',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Container(
-                          height: 200,
-                          child: ListView(
-                            physics: BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            children: List.generate(
-                                mainViewModel.starShipInfo.films.length,
-                                (index) => FilmImageCard(
-                                      width: 115,
-                                      assetUrl:
-                                          "assets/images/films/${mainViewModel.starShipInfo.films[index].split('/')[5]}.jpg",
-                                      onTap: () {},
-                                    )),
-                          ),
-                        ),
-                      ),
+                      mainViewModel.planetInfo.films.isNotEmpty
+                          ? ListTile(
+                              title: Text(
+                                'Films',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Container(
+                                height: 200,
+                                child: ListView(
+                                  physics: BouncingScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  children: List.generate(
+                                      mainViewModel.planetInfo.films.length,
+                                      (index) => FilmImageCard(
+                                            width: 115,
+                                            assetUrl:
+                                                "assets/images/films/${mainViewModel.planetInfo.films[index].split('/')[5]}.jpg",
+                                            onTap: () {},
+                                          )),
+                                ),
+                              ),
+                            )
+                          : Container(),
                     ],
                   ),
           )

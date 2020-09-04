@@ -6,13 +6,14 @@ class FilmImageCard extends StatelessWidget {
   String assetUrl;
   Function onTap;
 
-  double height = double.infinity;
   double width;
+  double height;
 
   FilmImageCard({
     @required this.assetUrl,
     @required this.onTap,
     this.width = 140,
+    this.height = double.infinity,
   });
 
   @override

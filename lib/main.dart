@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:starwars_companion/core/view_models/main_view_model.dart';
 import 'package:starwars_companion/ui/screens/home.dart';
+import 'package:starwars_companion/ui/screens/splash_screen.dart';
 import 'package:starwars_companion/ui/values/colors.dart';
 import 'package:starwars_companion/ui/values/routes.dart' as Routes;
 import 'package:starwars_companion/ui/values/strings.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
               bodyText1: TextStyle(color: Colors.white),
               bodyText2: TextStyle(color: Colors.white),
             )),
-        home: HomeScreen(),
+        home: SplashScreen(),
       ),
     );
   }
